@@ -1,0 +1,501 @@
+<!DOCTYPE html><html lang="th"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRI Dashboard — TEN X รุ่น 5 (71 องค์กร)</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;500;600;700;800&family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0B1437;--navy2:#111C44;--navy3:#1B254B;
+  --blue:#2563EB;--blue2:#3B82F6;--blue3:#60A5FA;--blue-bg:#EFF4FF;
+  --teal:#0D9488;--teal2:#14B8A6;--teal-bg:#F0FDFA;
+  --emerald:#059669;--emerald-bg:#ECFDF5;
+  --amber:#D97706;--amber-bg:#FFFBEB;
+  --orange:#EA580C;--orange-bg:#FFF7ED;
+  --red:#DC2626;--red2:#EF4444;--red-bg:#FEF2F2;
+  --purple:#7C3AED;--purple2:#A78BFA;--purple-bg:#F5F3FF;
+  --white:#FFFFFF;--bg:#F7F8FC;--surface:#F0F2F8;--surface2:#E8EBF3;
+  --border:#DCDFE9;--border2:#ECEEF5;
+  --ink:#151929;--ink2:#374060;--ink3:#656B88;--ink4:#969CB8;
+  --radius:20px;
+  --shadow:0 4px 24px rgba(11,20,55,0.08);
+  --shadow-lg:0 12px 48px rgba(11,20,55,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Kanit',sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;font-weight:300;line-height:1.7}
+body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;background:repeating-linear-gradient(135deg,rgba(37,99,235,.012) 0px,rgba(37,99,235,.012) 1px,transparent 1px,transparent 40px),radial-gradient(ellipse at 15% 0%,rgba(37,99,235,.05),transparent 55%),radial-gradient(ellipse at 85% 100%,rgba(13,148,136,.035),transparent 55%)}
+
+/* ===== STICKY HEADER (แบบเดิม) ===== */
+.header{
+  background:var(--white);border-bottom:1px solid var(--border);
+  padding:1rem 2.5rem;position:sticky;top:0;z-index:100;
+  box-shadow:0 1px 4px rgba(0,0,0,.04);
+}
+.header-inner{max-width:1300px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.logo{display:flex;align-items:center;gap:.85rem}
+.logo-icon{width:48px;height:48px;background:linear-gradient(145deg,var(--navy),var(--blue));border-radius:13px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(11,20,55,.2)}
+.logo-icon svg{width:24px;height:24px;color:#fff}
+.logo-text h1{font-size:1.25rem;font-weight:500;color:var(--navy)}
+.logo-text span{font-size:.82rem;color:var(--ink3);font-weight:300}
+.company-badge{background:linear-gradient(135deg,var(--teal-bg),var(--blue-bg));border:1px solid rgba(13,148,136,.18);padding:.7rem 1.5rem;border-radius:12px}
+.company-name{font-size:1rem;font-weight:500;color:var(--teal)}
+.company-info{font-size:.78rem;color:var(--ink3);margin-top:2px;font-weight:300}
+
+/* ===== CONTAINER ===== */
+.container{max-width:1300px;margin:0 auto;padding:0 2.5rem}
+@media(max-width:900px){.container,.header{padding-left:1.5rem;padding-right:1.5rem}}
+
+/* ===== LEGEND (แบบเดิม — light bg) ===== */
+.legend-box{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem;margin-bottom:2.5rem;box-shadow:var(--shadow)}
+.legend-title{font-size:1rem;font-weight:500;color:var(--navy);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.legend-title svg{width:20px;height:20px;color:var(--navy);opacity:.6}
+.legend-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem}
+@media(max-width:800px){.legend-grid{grid-template-columns:1fr}}
+.legend-section h4{font-size:.85rem;color:var(--ink3);margin-bottom:.8rem;font-weight:500;display:flex;align-items:center;gap:.4rem}
+.legend-section h4 svg{width:16px;height:16px;opacity:.5}
+.legend-item{display:flex;align-items:center;gap:.6rem;padding:.38rem 0;font-size:.9rem;color:var(--ink2);font-weight:300}
+.legend-dot{width:11px;height:11px;border-radius:3px;flex-shrink:0}
+.legend-range{font-weight:500;min-width:125px;color:var(--ink)}
+
+/* ===== SCORE SECTION (แบบเดิม — light bg, navy score card left) ===== */
+.score-section{margin-bottom:2.5rem}
+.score-grid{display:grid;grid-template-columns:340px 1fr;gap:1.5rem}
+@media(max-width:1000px){.score-grid{grid-template-columns:1fr}}
+
+.score-card{
+  background:linear-gradient(160deg,var(--navy),var(--navy3));
+  border-radius:var(--radius);text-align:center;padding:2.75rem 2rem;color:#fff;
+  position:relative;overflow:hidden;box-shadow:var(--shadow-lg);
+}
+.score-card::after{content:'';position:absolute;right:-40px;bottom:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(37,99,235,.12),transparent 70%)}
+.score-label{font-size:.9rem;opacity:.5;font-weight:300;margin-bottom:.65rem}
+.score-value{font-size:4.5rem;font-weight:700;line-height:1;background:linear-gradient(135deg,#fff,var(--blue3));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.score-max{font-size:1.6rem;font-weight:300;-webkit-text-fill-color:rgba(255,255,255,.3)}
+.score-pct{font-size:1.1rem;opacity:.55;margin-top:.45rem;font-weight:300}
+.score-level{display:inline-block;margin-top:1rem;padding:.5rem 1.5rem;border-radius:30px;font-weight:500;font-size:.9rem;background:rgba(217,119,6,.2);color:#fbbf24;border:1px solid rgba(217,119,6,.25)}
+.score-desc{text-align:left;margin-top:1.5rem;font-size:.88rem;opacity:.5;line-height:1.7;font-weight:300;position:relative;z-index:1}
+.score-desc b{opacity:.85;font-weight:500}
+
+.persp-right{display:flex;flex-direction:column;gap:.5rem}
+.persp-right-title{font-weight:500;color:var(--navy);font-size:1rem;margin-bottom:.5rem}
+.persp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+@media(max-width:1000px){.persp-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.persp-grid{grid-template-columns:1fr}}
+
+.persp-card{
+  background:var(--white);border:1px solid var(--border);border-radius:16px;
+  padding:1.35rem 1rem;text-align:center;box-shadow:var(--shadow);
+  border-top:4px solid;transition:transform .2s,box-shadow .2s;
+}
+.persp-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.persp-card svg{width:22px;height:22px;opacity:.65;margin-bottom:.3rem}
+.persp-card .p-name{font-size:.92rem;font-weight:500;color:var(--ink);margin-bottom:.25rem}
+.persp-card .p-score{font-size:2.2rem;font-weight:700;line-height:1}
+.persp-card .p-avg{font-size:.78rem;color:var(--ink4);font-weight:300;margin-top:.15rem}
+.persp-card .p-gap{font-size:.78rem;padding:.15rem .6rem;border-radius:5px;font-weight:500;display:inline-block;margin-top:.3rem}
+.gap-pos{background:var(--emerald-bg);color:var(--emerald)}
+.gap-neg{background:var(--red-bg);color:var(--red)}
+.gap-neu{background:var(--surface);color:var(--ink3)}
+.persp-card .p-bar{height:6px;background:var(--surface2);border-radius:3px;position:relative;margin-top:.6rem}
+.persp-card .p-bar-fill{height:100%;border-radius:3px}
+.persp-card .p-bar-mark{position:absolute;top:-2px;height:10px;width:2px;background:var(--ink);border-radius:1px}
+.bar-legend{font-size:.75rem;color:var(--ink4);margin-top:.75rem;font-weight:300}
+
+/* ===== SECTION WRAPPERS (แบบใหม่) ===== */
+.s-white{background:var(--white);padding:3.5rem 0}
+.s-gray{background:var(--bg);padding:3.5rem 0}
+.s-navy{background:linear-gradient(165deg,var(--navy2),var(--navy3));padding:3.5rem 0;color:#fff}
+.sdivider{width:50px;height:3px;background:linear-gradient(90deg,var(--blue),var(--teal));border-radius:2px;margin-bottom:1.5rem}
+.s-navy .sdivider{background:linear-gradient(90deg,var(--blue3),var(--teal2))}
+.stitle{font-size:1.4rem;font-weight:600;margin-bottom:.35rem}
+.stitle .snum{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:var(--navy);color:#fff;border-radius:10px;font-size:.9rem;font-weight:700;margin-right:.65rem;vertical-align:middle}
+.s-navy .stitle .snum{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.12)}
+.ssub{font-size:.95rem;color:var(--ink3);font-weight:300;margin-bottom:2rem;max-width:700px}
+.s-navy .ssub{color:rgba(255,255,255,.45)}
+
+/* ===== PRIORITY CARDS ===== */
+.pri-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+@media(max-width:900px){.pri-grid{grid-template-columns:1fr}}
+.pri-card{background:var(--white);border-radius:var(--radius);padding:1.75rem;border:1px solid var(--border);box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.pri-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.pri-card::before{content:'';position:absolute;left:0;top:0;width:5px;height:100%}
+.pri-card.crit::before{background:linear-gradient(180deg,var(--red),var(--red2))}
+.pri-head{display:flex;justify-content:space-between;align-items:start;margin-bottom:.65rem;flex-wrap:wrap;gap:.5rem}
+.pri-name{font-size:1.05rem;font-weight:500;padding-left:.75rem}
+.pri-badges{display:flex;gap:.4rem;align-items:center}
+.badge-score{padding:.2rem .65rem;border-radius:6px;font-weight:600;font-size:.85rem}
+.badge-score.crit{background:var(--red-bg);color:var(--red)}
+.badge-urg{padding:.2rem .65rem;border-radius:6px;font-weight:500;font-size:.78rem}
+.badge-urg.crit{background:var(--red-bg);color:var(--red)}
+.pri-detail{font-size:.88rem;color:var(--ink3);margin-bottom:.85rem;line-height:1.75;padding-left:.75rem;font-weight:300}
+.pri-detail b{color:var(--ink2);font-weight:500}
+.pri-sol{background:var(--surface);border-radius:12px;padding:1rem 1.25rem;margin-left:.75rem;font-size:.88rem;border:1px solid var(--border2)}
+.pri-sol-title{font-weight:600;color:var(--navy);margin-bottom:.45rem;font-size:.88rem}
+.pri-sol ul{padding-left:1.25rem;color:var(--ink2);font-weight:300}
+.pri-sol li{margin-bottom:.3rem}
+.pri-sol b{font-weight:500;color:var(--ink)}
+
+/* ===== PERSPECTIVE ANALYSIS ===== */
+.pa-card{background:var(--white);border-radius:var(--radius);padding:0;margin-bottom:1.75rem;border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden}
+.pa-head{padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.pa-head.people{background:linear-gradient(135deg,rgba(220,38,38,.06),rgba(220,38,38,.02))}
+.pa-head.business{background:linear-gradient(135deg,rgba(5,150,105,.06),rgba(5,150,105,.02))}
+.pa-head.tech{background:linear-gradient(135deg,rgba(124,58,237,.06),rgba(124,58,237,.02))}
+.pa-head.culture{background:linear-gradient(135deg,rgba(13,148,136,.06),rgba(13,148,136,.02))}
+.pa-left{display:flex;align-items:center;gap:.85rem}
+.pa-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center}
+.pa-icon.people{background:var(--red-bg)}.pa-icon.business{background:var(--emerald-bg)}.pa-icon.tech{background:var(--purple-bg)}.pa-icon.culture{background:var(--teal-bg)}
+.pa-icon svg{width:22px;height:22px}
+.pa-name{font-size:1.15rem;font-weight:500}
+.pa-status{font-size:.88rem;font-weight:400;margin-top:2px}
+.pa-right{text-align:right}
+.pa-big{font-size:2.5rem;font-weight:700;line-height:1}
+.pa-meta{font-size:.82rem;color:var(--ink4);font-weight:300;margin-top:4px}
+.pa-body{padding:0 2rem 1.75rem}
+
+.dt{width:100%;border-collapse:collapse;font-size:.9rem}
+.dt th{text-align:left;padding:.8rem .85rem;background:var(--surface);color:var(--ink3);font-weight:500;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;border-bottom:2px solid var(--border)}
+.dt td{padding:.8rem .85rem;border-bottom:1px solid var(--border2);color:var(--ink2);font-weight:300}
+.dt tr:hover{background:var(--blue-bg)}
+.dt td b{color:var(--ink);font-weight:500}
+.sb{display:inline-block;padding:.2rem .65rem;border-radius:5px;font-weight:600;font-size:.82rem}
+.sb.c{background:var(--red-bg);color:var(--red)}.sb.w{background:var(--amber-bg);color:var(--amber)}.sb.g{background:var(--emerald-bg);color:var(--emerald)}
+.ub{display:inline-flex;align-items:center;padding:.2rem .6rem;border-radius:5px;font-size:.78rem;font-weight:500}
+.ub.c{background:var(--red-bg);color:var(--red)}.ub.h{background:var(--orange-bg);color:var(--orange)}.ub.m{background:var(--amber-bg);color:var(--amber)}.ub.l{background:var(--emerald-bg);color:var(--emerald)}
+
+/* ===== CONSULT ===== */
+.con-box{border-radius:var(--radius);padding:2rem;margin-bottom:1.25rem;border:1px solid}
+.con-title{font-weight:600;margin-bottom:1rem;font-size:1.1rem}
+.con-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+@media(max-width:900px){.con-grid{grid-template-columns:1fr}}
+.con-phase{font-weight:600;font-size:.95rem;margin-bottom:.5rem;color:var(--ink)}
+.con-list{padding-left:1.3rem;font-size:.92rem;color:var(--ink2);font-weight:300}
+.con-list li{margin-bottom:.45rem;line-height:1.7}
+.con-list b{font-weight:500;color:var(--ink)}
+
+/* ===== SUMMARY ===== */
+.sum-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+@media(max-width:900px){.sum-grid{grid-template-columns:1fr}}
+.sum-card{border-radius:var(--radius);padding:2rem;border:1px solid}
+.sum-card.str{background:linear-gradient(150deg,var(--emerald-bg),#fff);border-color:rgba(5,150,105,.15)}
+.sum-card.wk{background:linear-gradient(150deg,var(--red-bg),#fff);border-color:rgba(220,38,38,.12)}
+.sum-title{font-weight:600;font-size:1.05rem;margin-bottom:1rem}
+
+/* Roadmap */
+.rm-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:2rem}
+@media(max-width:900px){.rm-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.rm-grid{grid-template-columns:1fr}}
+.rm-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:1.35rem;border-top:4px solid;backdrop-filter:blur(10px)}
+.rm-phase{font-weight:600;font-size:.95rem;margin-bottom:.5rem}
+.rm-items{font-size:.85rem;opacity:.5;line-height:1.7;font-weight:300}
+
+/* Footer */
+.footer{text-align:center;padding:2.5rem;font-size:.82rem;color:var(--ink4);border-top:1px solid var(--border);font-weight:300}
+.footer strong{color:var(--navy);font-weight:500}
+
+/* Collapsible legend */
+.legend-toggle{cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none}
+.legend-toggle .arrow{transition:transform .3s ease;font-size:.85rem;color:var(--ink4)}
+.legend-toggle .arrow.open{transform:rotate(180deg)}
+.legend-content{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.legend-content.open{max-height:600px}
+
+/* Hero wrapper — กรอบพรีเมี่ยมครอบ section 1 */
+.hero-wrapper{
+  background:linear-gradient(160deg,#FDFEFF,#F6F9FF);
+  border:1px solid rgba(37,99,235,.12);
+  border-radius:calc(var(--radius) + 4px);
+  padding:2.25rem;
+  position:relative;
+  overflow:hidden;
+  box-shadow:
+    0 1px 3px rgba(11,20,55,.04),
+    0 8px 32px rgba(37,99,235,.07),
+    inset 0 1px 0 rgba(255,255,255,.8);
+}
+.hero-wrapper::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--blue),var(--purple),var(--teal));
+  border-radius:calc(var(--radius) + 4px) calc(var(--radius) + 4px) 0 0;
+}
+.hero-wrapper::after{
+  content:'';position:absolute;top:0;right:0;width:300px;height:300px;
+  background:radial-gradient(circle at top right,rgba(37,99,235,.05),transparent 70%);
+  pointer-events:none;
+}
+.hero-wrapper .score-section{margin-bottom:0}
+
+/* Priority badges no-wrap */
+.pri-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.65rem;flex-wrap:nowrap;gap:.5rem}
+.pri-name{font-size:1.05rem;font-weight:500;padding-left:.75rem;min-width:0;flex:1}
+.pri-name .th{font-size:.82rem;font-weight:300;color:var(--ink3)}
+.pri-badges{display:flex;gap:.4rem;align-items:center;flex-shrink:0}
+
+/* Hidden SVG defs */
+.svg-defs{position:absolute;width:0;height:0;overflow:hidden}
+
+/* Animations */
+.s-white,.s-gray,.s-navy{animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@media print{.header{position:static}.pa-card{break-inside:avoid}body::before{display:none}}
+</style>
+<style>
+.chart-wrap{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem;box-shadow:var(--shadow);height:680px;position:relative}
+.chart-legend{display:flex;gap:1.25rem;flex-wrap:wrap;margin-top:1rem;font-size:.82rem;color:var(--ink3);font-weight:300}
+.chart-legend span{display:inline-flex;align-items:center;gap:.4rem}
+.cl-dot{width:11px;height:11px;border-radius:3px}
+.opp-box{border-radius:var(--radius);padding:1.75rem 2rem;margin-bottom:1.25rem;border:1px solid}
+.opp-item{background:var(--white);border-radius:12px;padding:.95rem 1.15rem;margin-bottom:.65rem;border:1px solid var(--border2)}
+.opp-item:last-child{margin-bottom:0}
+.opp-item .oname{font-weight:500;color:var(--ink);font-size:.95rem}
+.opp-item .odesc{font-size:.85rem;color:var(--ink3);font-weight:300;margin-top:.2rem}
+.dtabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.dtab{font-family:'Kanit',sans-serif;font-size:.92rem;font-weight:400;padding:.6rem 1.3rem;border-radius:30px;border:1px solid var(--border);background:var(--white);color:var(--ink2);cursor:pointer;transition:all .2s}
+.dtab:hover{border-color:var(--blue);color:var(--blue)}
+.dtab.active{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(37,99,235,.25)}
+.dpanel{display:none;animation:fadeUp .4s ease both}
+.dpanel.show{display:block}
+.dpanel .dt td{vertical-align:middle}
+.d-bar{height:5px;background:var(--surface2);border-radius:3px;margin-top:.35rem;width:90px}
+.d-bar-fill{height:100%;border-radius:3px}
+
+/* mobile + table scroll */
+.dt-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.dt-scroll .dt{min-width:640px}
+@media(max-width:600px){
+ .header{padding:.85rem 1.1rem} .logo-text h1{font-size:1.02rem} .company-badge{padding:.55rem 1rem}
+ .company-name{font-size:.86rem} .company-info{font-size:.72rem}
+ .container{padding:0 1.1rem} .s-white,.s-gray,.s-navy{padding:2.25rem 0}
+ .stitle{font-size:1.15rem} .score-value{font-size:3.4rem} .pa-big{font-size:2rem}
+ .pri-head{flex-wrap:wrap} .pri-name{font-size:.98rem}
+ .chart-wrap{height:560px;padding:1rem .6rem}
+}
+@media(max-width:380px){ .score-value{font-size:2.9rem} .persp-card .p-score{font-size:1.9rem} }
+</style></head><body>
+<svg class="svg-defs" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="ic-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 6-6"/></symbol>
+  <symbol id="ic-monitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></symbol>
+  <symbol id="ic-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></symbol>
+  <symbol id="ic-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01z"/></symbol>
+  <symbol id="ic-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.78 7.78 5.5 5.5 0 017.78-7.78zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></symbol>
+  <symbol id="ic-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></symbol>
+  <symbol id="ic-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="ic-bar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></symbol>
+</svg>
+<header class="header"><div class="header-inner">
+ <div class="logo"><div class="logo-icon"><svg><use href="#ic-transform"/></svg></div>
+ <div class="logo-text"><h1>📊 Transformation Readiness Index</h1><span>รายงานภาพรวมผลการประเมินความพร้อมในการปรับเปลี่ยนองค์กร</span></div></div>
+ <div class="company-badge"><div class="company-name">TEN X · รุ่น 5 (Round 5)</div>
+ <div class="company-info">71 องค์กร · ประเมินเมื่อ 16/06/2026</div></div>
+</div></header>
+<main><section class="s-gray" style="padding-top:2.25rem;padding-bottom:2rem">
+<div class="container">
+ <div class="legend-box">
+  <div class="legend-toggle" onclick="this.querySelector('.arrow').classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+   <div class="legend-title" style="margin-bottom:0"><svg><use href="#ic-book"/></svg> หลักเกณฑ์การแปลค่าคะแนน</div><span class="arrow">▼</span></div>
+  <div class="legend-content"><div class="legend-grid" style="margin-top:1rem">
+   <div class="legend-section"><h4><svg><use href="#ic-target"/></svg> ระดับความพร้อม (คะแนน 1–4)</h4>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--emerald)"></div><span class="legend-range">3.50 – 4.00</span>🟢 พร้อมเต็มที่</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div><span class="legend-range">3.00 – 3.49</span>🔵 พร้อมดี</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div><span class="legend-range">2.50 – 2.99</span>🟡 พร้อมปานกลาง</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div><span class="legend-range">2.00 – 2.49</span>🟠 พร้อมน้อย</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div><span class="legend-range">1.00 – 1.99</span>🔴 ไม่พร้อม</div></div>
+   <div class="legend-section"><h4><svg><use href="#ic-bar"/></svg> ระดับความเร่งด่วน (จัดลำดับการพัฒนา)</h4>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div><span class="legend-range">&lt; 2.70</span>🚨 วิกฤต — เร่งพัฒนาทันที</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div><span class="legend-range">2.70 – 2.79</span>⚠️ สูง</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div><span class="legend-range">2.80 – 2.89</span>📌 ปานกลาง</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--emerald)"></div><span class="legend-range">≥ 2.90</span>✅ ต่ำ — รักษาระดับ</div></div>
+  </div></div></div>
+
+ <div class="sdivider"></div>
+ <div class="stitle"><span class="snum">1</span> 📋 สรุปผลการประเมินภาพรวม (71 องค์กร)</div>
+ <div class="score-section"><div class="score-grid">
+  <div class="score-card"><div class="score-label">คะแนน TRI เฉลี่ยรวม</div>
+   <div class="score-value">2.73<span class="score-max">/4.00</span></div>
+   <div class="score-pct">คิดเป็น 68.3%</div>
+   <div class="score-level">🟡 พร้อมปานกลาง</div>
+   <div class="score-desc">ภาพรวมรุ่น 5 อยู่ในระดับ <b>พร้อมปานกลาง</b> จุดแข็งอยู่ที่ <b>Culture (2.84)</b> และ <b>Business (2.80)</b> ส่วนมิติที่ต้องเร่งพัฒนามากที่สุดคือ <b>People &amp; Leadership (2.51)</b></div></div>
+  <div style="display:flex;flex-direction:column;gap:.65rem">
+   <div class="persp-right-title">คะแนนเฉลี่ย 4 มิติหลัก</div>
+   <div class="persp-grid"><div class="persp-card" style="border-top-color:var(--blue)"><svg style="color:var(--blue)"><use href="#ic-chart"/></svg>
+ <div class="p-name">Business</div><div class="p-score" style="color:var(--blue)">2.80</div>
+ <div class="p-avg">🟡 พร้อมปานกลาง</div>
+ <div class="p-bar"><div class="p-bar-fill" style="width:70.0%;background:linear-gradient(90deg,var(--blue),var(--blue))"></div></div></div><div class="persp-card" style="border-top-color:var(--purple)"><svg style="color:var(--purple)"><use href="#ic-monitor"/></svg>
+ <div class="p-name">Technology</div><div class="p-score" style="color:var(--purple)">2.77</div>
+ <div class="p-avg">🟡 พร้อมปานกลาง</div>
+ <div class="p-bar"><div class="p-bar-fill" style="width:69.4%;background:linear-gradient(90deg,var(--purple),var(--purple))"></div></div></div><div class="persp-card" style="border-top-color:var(--red)"><svg style="color:var(--red)"><use href="#ic-users"/></svg>
+ <div class="p-name">People</div><div class="p-score" style="color:var(--red)">2.51</div>
+ <div class="p-avg">🟡 พร้อมปานกลาง</div>
+ <div class="p-bar"><div class="p-bar-fill" style="width:62.7%;background:linear-gradient(90deg,var(--red),var(--red))"></div></div></div><div class="persp-card" style="border-top-color:var(--teal)"><svg style="color:var(--teal)"><use href="#ic-star"/></svg>
+ <div class="p-name">Culture</div><div class="p-score" style="color:var(--teal)">2.84</div>
+ <div class="p-avg">🟡 พร้อมปานกลาง</div>
+ <div class="p-bar"><div class="p-bar-fill" style="width:71.0%;background:linear-gradient(90deg,var(--teal),var(--teal))"></div></div></div></div>
+   <div class="bar-legend">🔵 ความสูงของแท่ง = คะแนนเฉลี่ยของแต่ละมิติ (เต็ม 4.00)</div>
+   <div class="con-box" style="border-color:rgba(220,38,38,.18);background:linear-gradient(150deg,rgba(220,38,38,.05),#fff);padding:1.1rem 1.35rem;margin:.4rem 0 0">
+    <div style="font-weight:600;color:var(--red);font-size:.95rem;margin-bottom:.3rem">🚨 มิติที่ต่ำที่สุด: People &amp; Leadership (2.51)</div>
+    <div style="font-size:.86rem;color:var(--ink2);font-weight:300;line-height:1.7">หมวดย่อยที่ต้องเร่งพัฒนา: ตัวแทนการเปลี่ยนแปลง 2.23 · ระบบบริหารการเปลี่ยนแปลง 2.35 · การสื่อสารการเปลี่ยนแปลง 2.43 · Critical Role & แผนสืบทอด 2.51</div></div>
+  </div>
+ </div></div>
+</div></section><section class="s-white"><div class="container">
+ <div class="sdivider"></div>
+ <div class="stitle"><span class="snum">2</span> 🚨 ประเด็นเร่งด่วนที่ต้องพัฒนา (6 อันดับคะแนนต่ำสุด)</div>
+ <div class="ssub">หมวดย่อยที่คะแนนเฉลี่ยต่ำสุดของรุ่น 5 — ทั้ง 6 อยู่ในเกณฑ์ 🚨 วิกฤต (ต่ำกว่า 2.70) และ 5 ใน 6 อยู่ในมิติ People &amp; Leadership</div>
+ <div class="pri-grid"><div class="pri-card crit"><div class="pri-head">
+ <div class="pri-name">1. Change Agent <span class="th">(ตัวแทนการเปลี่ยนแปลง)</span></div>
+ <div class="pri-badges"><span class="badge-score crit">2.23</span><span class="badge-urg crit">🚨 วิกฤต</span></div></div>
+ <div class="pri-detail"><b>ปัญหา:</b> มีองค์กรถึง <b>65%</b> ที่ได้คะแนนหมวดนี้ในระดับต่ำ (ตอบ 1–2) จาก 71 องค์กร<br>
+ <b>ผลกระทบ:</b> ขาดตัวแทนผลักดันในหน่วยงาน ทำให้การเปลี่ยนแปลงไม่มีคนขับเคลื่อนหน้างาน เสี่ยงสะดุดและถูกต่อต้าน</div>
+ <div class="pri-sol"><div class="pri-sol-title">💡 Solutions สำหรับ Consultant</div><ul><li>Change Agent Program (สร้างตัวแทนการเปลี่ยนแปลง)</li><li>ADKAR Framework</li><li><b>อ้างอิง:</b> DeOne Appendix — Priority 1 People &amp; Change Capability</li></ul></div></div><div class="pri-card crit"><div class="pri-head">
+ <div class="pri-name">2. Change System <span class="th">(ระบบบริหารการเปลี่ยนแปลง)</span></div>
+ <div class="pri-badges"><span class="badge-score crit">2.35</span><span class="badge-urg crit">🚨 วิกฤต</span></div></div>
+ <div class="pri-detail"><b>ปัญหา:</b> มีองค์กรถึง <b>62%</b> ที่ได้คะแนนหมวดนี้ในระดับต่ำ (ตอบ 1–2) จาก 71 องค์กร<br>
+ <b>ผลกระทบ:</b> ไม่มีระบบบริหารการเปลี่ยนแปลงที่ชัดเจน การ Transformation จึงไร้ทิศทาง วัดผลและติดตามไม่ได้</div>
+ <div class="pri-sol"><div class="pri-sol-title">💡 Solutions สำหรับ Consultant</div><ul><li>ADKAR Framework (บริหารการเปลี่ยนแปลงระดับบุคคล)</li><li>Change Governance Structure</li><li><b>อ้างอิง:</b> DeOne Appendix — Priority 1 People &amp; Change Capability</li></ul></div></div><div class="pri-card crit"><div class="pri-head">
+ <div class="pri-name">3. Communication <span class="th">(การสื่อสารการเปลี่ยนแปลง)</span></div>
+ <div class="pri-badges"><span class="badge-score crit">2.43</span><span class="badge-urg crit">🚨 วิกฤต</span></div></div>
+ <div class="pri-detail"><b>ปัญหา:</b> มีองค์กรถึง <b>44%</b> ที่ได้คะแนนหมวดนี้ในระดับต่ำ (ตอบ 1–2) จาก 71 องค์กร<br>
+ <b>ผลกระทบ:</b> พนักงานไม่เข้าใจเหตุผลและผลกระทบของการเปลี่ยนแปลง เกิดข่าวลือ ความกังวล และแรงต้าน</div>
+ <div class="pri-sol"><div class="pri-sol-title">💡 Solutions สำหรับ Consultant</div><ul><li>Communication Plan (แผนการสื่อสาร)</li><li>ADKAR Framework</li><li><b>อ้างอิง:</b> DeOne Appendix — Priority 1 People &amp; Change Capability</li></ul></div></div><div class="pri-card crit"><div class="pri-head">
+ <div class="pri-name">4. Succession <span class="th">(Critical Role & แผนสืบทอด)</span></div>
+ <div class="pri-badges"><span class="badge-score crit">2.51</span><span class="badge-urg crit">🚨 วิกฤต</span></div></div>
+ <div class="pri-detail"><b>ปัญหา:</b> มีองค์กรถึง <b>54%</b> ที่ได้คะแนนหมวดนี้ในระดับต่ำ (ตอบ 1–2) จาก 71 องค์กร<br>
+ <b>ผลกระทบ:</b> ไม่มีคนพร้อมทดแทนตำแหน่งสำคัญ เสี่ยงสูงเมื่อบุคลากรหลักลาออก/เกษียณกะทันหัน</div>
+ <div class="pri-sol"><div class="pri-sol-title">💡 Solutions สำหรับ Consultant</div><ul><li>Critical Role Mapping</li><li>Succession Planning Framework</li><li><b>อ้างอิง:</b> DeOne Appendix — Priority 1 People &amp; Change Capability</li></ul></div></div><div class="pri-card crit"><div class="pri-head">
+ <div class="pri-name">5. Skills <span class="th">(ทักษะและศักยภาพพนักงาน)</span></div>
+ <div class="pri-badges"><span class="badge-score crit">2.52</span><span class="badge-urg crit">🚨 วิกฤต</span></div></div>
+ <div class="pri-detail"><b>ปัญหา:</b> มีองค์กรถึง <b>35%</b> ที่ได้คะแนนหมวดนี้ในระดับต่ำ (ตอบ 1–2) จาก 71 องค์กร<br>
+ <b>ผลกระทบ:</b> ทักษะพนักงานไม่สอดคล้องกับทิศทางองค์กร ทำให้ Execute กลยุทธ์ใหม่ได้ช้าและไม่เต็มประสิทธิภาพ</div>
+ <div class="pri-sol"><div class="pri-sol-title">💡 Solutions สำหรับ Consultant</div><ul><li>Skills Gap Analysis</li><li>L&D Roadmap</li><li><b>อ้างอิง:</b> DeOne Appendix — Priority 1 People &amp; Change Capability</li></ul></div></div><div class="pri-card crit"><div class="pri-head">
+ <div class="pri-name">6. Change Plan <span class="th">(การวางแผนการเปลี่ยนแปลง)</span></div>
+ <div class="pri-badges"><span class="badge-score crit">2.54</span><span class="badge-urg crit">🚨 วิกฤต</span></div></div>
+ <div class="pri-detail"><b>ปัญหา:</b> มีองค์กรถึง <b>24%</b> ที่ได้คะแนนหมวดนี้ในระดับต่ำ (ตอบ 1–2) จาก 71 องค์กร<br>
+ <b>ผลกระทบ:</b> การเปลี่ยนแปลงไม่มีแผนรองรับเป็นขั้นตอน เสี่ยงทำแบบเฉพาะหน้าและทรัพยากรกระจัดกระจาย</div>
+ <div class="pri-sol"><div class="pri-sol-title">💡 Solutions สำหรับ Consultant</div><ul><li>Transformation Roadmap</li><li>Change Impact Assessment</li><li><b>อ้างอิง:</b> DeOne Appendix — Priority 1 People &amp; Change Capability</li></ul></div></div></div>
+</div></section><section class="s-gray"><div class="container"><div class="sdivider"></div><div class="stitle"><span class="snum">3</span> 📊 วิเคราะห์รายละเอียดแต่ละมิติ</div><div class="ssub">เรียงจากมิติที่ต้องพัฒนามากที่สุดไปน้อยที่สุด · Solutions อ้างอิงจาก DeOne Appendix Methodologies</div><div class="pa-card"><div class="pa-head people"><div class="pa-left">
+ <div class="pa-icon people"><svg style="color:var(--red)"><use href="#ic-users"/></svg></div>
+ <div><div class="pa-name">People &amp; Leadership (พนักงานและภาวะผู้นำ)</div><div class="pa-status" style="color:var(--red)">🚨 ต้องเร่งพัฒนามากที่สุด</div></div></div>
+ <div class="pa-right"><div class="pa-big" style="color:var(--red)">2.51</div><div class="pa-meta">🟡 พร้อมปานกลาง</div></div></div>
+ <div class="pa-body"><div class="dt-scroll"><table class="dt"><thead><tr><th>หมวดย่อย</th><th>คะแนน</th><th>ระดับ</th><th>ความเร่งด่วน</th><th>Solutions หลัก</th></tr></thead><tbody><tr><td><b>Change Agent</b> (ตัวแทนการเปลี่ยนแปลง)</td><td><span class="sb c">2.23</span></td>
+ <td>🟠 พร้อมน้อย</td><td><span class="ub c">🚨 วิกฤต</span></td><td>Change Agent Program (สร้างตัวแทนการเปลี่ยนแปลง), ADKAR Framework</td></tr><tr><td><b>Change System</b> (ระบบบริหารการเปลี่ยนแปลง)</td><td><span class="sb c">2.35</span></td>
+ <td>🟠 พร้อมน้อย</td><td><span class="ub c">🚨 วิกฤต</span></td><td>ADKAR Framework (บริหารการเปลี่ยนแปลงระดับบุคคล), Change Governance Structure</td></tr><tr><td><b>Communication</b> (การสื่อสารการเปลี่ยนแปลง)</td><td><span class="sb c">2.43</span></td>
+ <td>🟠 พร้อมน้อย</td><td><span class="ub c">🚨 วิกฤต</span></td><td>Communication Plan (แผนการสื่อสาร), ADKAR Framework</td></tr><tr><td><b>Succession</b> (Critical Role & แผนสืบทอด)</td><td><span class="sb c">2.51</span></td>
+ <td>🟡 พร้อมปานกลาง</td><td><span class="ub c">🚨 วิกฤต</span></td><td>Critical Role Mapping, Succession Planning Framework</td></tr><tr><td><b>Skills</b> (ทักษะและศักยภาพพนักงาน)</td><td><span class="sb c">2.52</span></td>
+ <td>🟡 พร้อมปานกลาง</td><td><span class="ub c">🚨 วิกฤต</span></td><td>Skills Gap Analysis, L&D Roadmap</td></tr><tr><td><b>Change Ready</b> (ความพร้อมปรับตัว)</td><td><span class="sb c">2.56</span></td>
+ <td>🟡 พร้อมปานกลาง</td><td><span class="ub c">🚨 วิกฤต</span></td><td>ADKAR Framework, Change Agent Program</td></tr><tr><td><b>Employee Own.</b> (ความเป็นเจ้าของของพนักงาน)</td><td><span class="sb c">2.58</span></td>
+ <td>🟡 พร้อมปานกลาง</td><td><span class="ub c">🚨 วิกฤต</span></td><td>Recognition Program, Change Impact Assessment</td></tr><tr><td><b>Leadership</b> (ภาวะผู้นำการเปลี่ยนแปลง)</td><td><span class="sb c">2.70</span></td>
+ <td>🟡 พร้อมปานกลาง</td><td><span class="ub c">🚨 วิกฤต</span></td><td>Succession Planning Framework, Change Agent Program</td></tr><tr><td><b>Engagement</b> (ความผูกพันและการมีส่วนร่วม)</td><td><span class="sb c">2.70</span></td>
+ <td>🟡 พร้อมปานกลาง</td><td><span class="ub c">🚨 วิกฤต</span></td><td>Recognition Program, Communication Plan</td></tr></tbody></table></div></div></div><div class="pa-card"><div class="pa-head tech"><div class="pa-left">
+ <div class="pa-icon tech"><svg style="color:var(--purple)"><use href="#ic-monitor"/></svg></div>
+ <div><div class="pa-name">Technology (เทคโนโลยี)</div><div class="pa-status" style="color:var(--ink3)">➖ ใกล้เคียงค่ากลาง ยังมีบางจุดต้องเร่ง</div></div></div>
+ <div class="pa-right"><div class="pa-big" style="color:var(--purple)">2.77</div><div class="pa-meta">🟡 พร้อมปานกลาง</div></div></div>
+ <div class="pa-body"><div class="dt-scroll"><table class="dt"><thead><tr><th>หมวดย่อย</th><th>คะแนน</th><th>ระดับ</th><th>ความเร่งด่วน</th><th>Solutions หลัก</th></tr></thead><tbody><tr><td><b>IT Infra</b> (โครงสร้างพื้นฐาน IT)</td><td><span class="sb c">2.61</span></td>
+ <td>🟡 พร้อมปานกลาง</td><td><span class="ub c">🚨 วิกฤต</span></td><td>Cloud Migration Strategy, IT Modernization Roadmap</td></tr><tr><td><b>Tech Align</b> (ความสอดคล้องกลยุทธ์ IT)</td><td><span class="sb c">2.69</span></td>
+ <td>🟡 พร้อมปานกลาง</td><td><span class="ub c">🚨 วิกฤต</span></td><td>IT Strategy Review, Cloud Migration Strategy</td></tr><tr><td><b>Tech Integ</b> (การบูรณาการเทคโนโลยี)</td><td><span class="sb w">2.80</span></td>
+ <td>🟡 พร้อมปานกลาง</td><td><span class="ub h">⚠️ สูง</span></td><td>IT Modernization Roadmap, AI Readiness Assessment</td></tr><tr><td><b>Process Auto</b> (ปรับปรุงกระบวนการด้วยเทคโนโลยี)</td><td><span class="sb w">2.85</span></td>
+ <td>🟡 พร้อมปานกลาง</td><td><span class="ub m">📌 ปานกลาง</span></td><td>Process Mining, IT Modernization Roadmap</td></tr><tr><td><b>Data Mgmt</b> (การจัดการข้อมูล)</td><td><span class="sb w">2.92</span></td>
+ <td>🟡 พร้อมปานกลาง</td><td><span class="ub l">✅ ต่ำ</span></td><td>จุดแข็ง — ต่อยอดด้วย AI Readiness Assessment</td></tr></tbody></table></div></div></div><div class="pa-card"><div class="pa-head business"><div class="pa-left">
+ <div class="pa-icon business"><svg style="color:var(--emerald)"><use href="#ic-chart"/></svg></div>
+ <div><div class="pa-name">Business Strategy (กลยุทธ์ธุรกิจ)</div><div class="pa-status" style="color:var(--emerald)">✅ ค่อนข้างดี — มีจุดแข็งหลายด้าน</div></div></div>
+ <div class="pa-right"><div class="pa-big" style="color:var(--emerald)">2.80</div><div class="pa-meta">🟡 พร้อมปานกลาง</div></div></div>
+ <div class="pa-body"><div class="dt-scroll"><table class="dt"><thead><tr><th>หมวดย่อย</th><th>คะแนน</th><th>ระดับ</th><th>ความเร่งด่วน</th><th>Solutions หลัก</th></tr></thead><tbody><tr><td><b>Change Plan</b> (การวางแผนการเปลี่ยนแปลง)</td><td><span class="sb c">2.54</span></td>
+ <td>🟡 พร้อมปานกลาง</td><td><span class="ub c">🚨 วิกฤต</span></td><td>Transformation Roadmap, Change Impact Assessment</td></tr><tr><td><b>Strategic Agil</b> (ความคล่องตัวเชิงกลยุทธ์)</td><td><span class="sb w">2.72</span></td>
+ <td>🟡 พร้อมปานกลาง</td><td><span class="ub h">⚠️ สูง</span></td><td>OKR Implementation, Process Mining</td></tr><tr><td><b>Market</b> (ความเข้าใจตลาด)</td><td><span class="sb w">2.76</span></td>
+ <td>🟡 พร้อมปานกลาง</td><td><span class="ub h">⚠️ สูง</span></td><td>จุดแข็ง — ใช้เป็น Leverage</td></tr><tr><td><b>Vision</b> (วิสัยทัศน์และความชัดเจน)</td><td><span class="sb w">2.87</span></td>
+ <td>🟡 พร้อมปานกลาง</td><td><span class="ub m">📌 ปานกลาง</span></td><td>จุดแข็ง — ใช้เป็น Leverage</td></tr><tr><td><b>Mgmt Support</b> (การสนับสนุนจากผู้บริหาร)</td><td><span class="sb g">3.12</span></td>
+ <td>🔵 พร้อมดี</td><td><span class="ub l">✅ ต่ำ</span></td><td>จุดแข็ง — ใช้เป็น Leverage</td></tr></tbody></table></div></div></div><div class="pa-card"><div class="pa-head culture"><div class="pa-left">
+ <div class="pa-icon culture"><svg style="color:var(--teal)"><use href="#ic-star"/></svg></div>
+ <div><div class="pa-name">Culture (วัฒนธรรมองค์กร)</div><div class="pa-status" style="color:var(--teal)">✅ มิติที่แข็งแรงที่สุด</div></div></div>
+ <div class="pa-right"><div class="pa-big" style="color:var(--teal)">2.84</div><div class="pa-meta">🟡 พร้อมปานกลาง</div></div></div>
+ <div class="pa-body"><div class="dt-scroll"><table class="dt"><thead><tr><th>หมวดย่อย</th><th>คะแนน</th><th>ระดับ</th><th>ความเร่งด่วน</th><th>Solutions หลัก</th></tr></thead><tbody><tr><td><b>Innovation</b> (ความเปิดกว้างต่อนวัตกรรม)</td><td><span class="sb w">2.81</span></td>
+ <td>🟡 พร้อมปานกลาง</td><td><span class="ub m">📌 ปานกลาง</span></td><td>Communication Plan, Recognition Program</td></tr><tr><td><b>Learning</b> (วัฒนธรรมการเรียนรู้)</td><td><span class="sb w">2.82</span></td>
+ <td>🟡 พร้อมปานกลาง</td><td><span class="ub m">📌 ปานกลาง</span></td><td>L&D Roadmap</td></tr><tr><td><b>Trust & Collab</b> (ความเชื่อมั่นและความร่วมมือ)</td><td><span class="sb w">2.89</span></td>
+ <td>🟡 พร้อมปานกลาง</td><td><span class="ub m">📌 ปานกลาง</span></td><td>จุดแข็ง — ใช้เป็น Leverage</td></tr></tbody></table></div></div></div></div></section><section class="s-white"><div class="container"><div class="sdivider"></div>
+<div class="stitle"><span class="snum">4</span> 🎯 โอกาสในการให้บริการที่ปรึกษา (Consulting Opportunities)</div>
+<div class="ssub">โปรแกรมที่ปรึกษาที่จัดลำดับตาม Gap ของรุ่น 5 · อ้างอิง Methodologies จาก DeOne Appendix</div>
+<div class="opp-box" style="border-color:rgba(220,38,38,.18);background:linear-gradient(150deg,rgba(220,38,38,.04),#fff)">
+ <div class="con-title" style="color:var(--red)">🚨 Priority 1: People &amp; Change Management (ดำเนินการทันที · เดือน 1–3)</div><div class="opp-item"><div class="oname">Change Agent Development Program</div><div class="odesc">อ้างอิง Appendix 1.6 — คัดเลือกและอบรมตัวแทนการเปลี่ยนแปลง 1 คน : พนักงาน 20–30 คน พร้อม Certification และ Network</div></div><div class="opp-item"><div class="oname">Communication & ADKAR Program</div><div class="odesc">อ้างอิง 4.1 + 1.5 — วาง Communication Plan และใช้ ADKAR สร้าง Awareness/Desire ลดแรงต้าน</div></div><div class="opp-item"><div class="oname">Skills Gap & L&D Program</div><div class="odesc">อ้างอิง 1.1 + 1.4 — ทำ Skills Gap Analysis ทั้งองค์กร แล้วออกแบบ L&D Roadmap + IDP รายบุคคล</div></div><div class="opp-item"><div class="oname">Succession Planning</div><div class="odesc">อ้างอิง 1.2 + 1.3 — Critical Role Mapping และเตรียม Successor สำหรับตำแหน่งวิกฤต</div></div></div>
+<div class="opp-box" style="border-color:rgba(232,89,12,.18);background:linear-gradient(150deg,rgba(232,89,12,.04),#fff)">
+ <div class="con-title" style="color:var(--orange)">⚠️ Priority 2: Technology &amp; Digital (ภายใน 6 เดือน · เดือน 4–6)</div><div class="opp-item"><div class="oname">IT Strategy Review</div><div class="odesc">อ้างอิง 2.2 — ปรับ IT ให้สอดคล้องกลยุทธ์ธุรกิจ เปลี่ยน IT จาก Cost Center เป็น Business Enabler</div></div><div class="opp-item"><div class="oname">IT Modernization Roadmap</div><div class="odesc">อ้างอิง 2.3 — ยกระดับ Legacy System ลด Technical Debt เพิ่มการบูรณาการข้ามระบบ</div></div><div class="opp-item"><div class="oname">Cloud Migration Strategy</div><div class="odesc">อ้างอิง 2.1 — ย้ายสู่ Cloud เพิ่ม Agility ลดต้นทุน Infrastructure และรองรับการเติบโต</div></div></div>
+<div class="opp-box" style="border-color:rgba(37,99,235,.18);background:linear-gradient(150deg,rgba(37,99,235,.04),#fff)">
+ <div class="con-title" style="color:var(--blue)">📌 Priority 3: Strategy &amp; Governance (เดือน 7–12)</div><div class="opp-item"><div class="oname">Transformation Roadmap</div><div class="odesc">อ้างอิง 3.1 — วางแผนการเปลี่ยนแปลง 3–5 ปี แบ่ง Phase Foundation / Build / Scale พร้อม PMO</div></div><div class="opp-item"><div class="oname">OKR Implementation</div><div class="odesc">อ้างอิง 3.2 — สร้าง Alignment ระหว่างกลยุทธ์กับการลงมือทำ เพิ่ม Focus และ Accountability</div></div><div class="opp-item"><div class="oname">Change Governance Structure</div><div class="odesc">อ้างอิง 3.3 — ตั้ง Steering Committee และ Decision Rights เพื่อกำกับโครงการให้ตัดสินใจได้เร็ว</div></div></div>
+</div></section><section class="s-gray"><div class="container"><div class="sdivider"></div>
+<div class="stitle"><span class="snum">5</span> 📊 กราฟเปรียบเทียบคะแนนรายหมวดย่อย</div>
+<div class="ssub">คะแนนเฉลี่ยทั้ง 22 หมวดย่อยของรุ่น 5 เรียงจากต่ำสุดไปสูงสุด</div>
+<div class="chart-wrap"><canvas id="subdimChart"></canvas></div>
+<div class="chart-legend">
+ <span><span class="cl-dot" style="background:rgba(239,68,68,.85)"></span>&lt; 2.70 วิกฤต</span>
+ <span><span class="cl-dot" style="background:rgba(245,158,11,.85)"></span>2.70–2.84</span>
+ <span><span class="cl-dot" style="background:rgba(251,191,36,.85)"></span>2.85–2.99</span>
+ <span><span class="cl-dot" style="background:rgba(16,185,129,.85)"></span>≥ 3.00 ดี</span>
+</div></div></section><section class="s-white"><div class="container"><div class="sdivider"></div>
+<div class="stitle"><span class="snum">6</span> 📋 สรุปและข้อเสนอแนะ</div>
+<div class="ssub">จุดแข็งที่ควรรักษาและต่อยอด เทียบกับจุดอ่อนที่ต้องเร่งพัฒนา (รุ่น 5 · 71 องค์กร)</div>
+<div class="sum-grid">
+ <div class="sum-card str"><div class="sum-title" style="color:var(--emerald)">✅ จุดแข็งที่ควรรักษาและต่อยอด</div>
+  <table class="dt" style="background:transparent"><tbody><tr><td><b>Mgmt Support</b> <span class="th" style="font-size:.8rem;color:var(--ink3)">(การสนับสนุนจากผู้บริหาร)</span></td><td><span class="sb g">3.12</span></td></tr><tr><td><b>Data Mgmt</b> <span class="th" style="font-size:.8rem;color:var(--ink3)">(การจัดการข้อมูล)</span></td><td><span class="sb w">2.92</span></td></tr><tr><td><b>Trust & Collab</b> <span class="th" style="font-size:.8rem;color:var(--ink3)">(ความเชื่อมั่นและความร่วมมือ)</span></td><td><span class="sb w">2.89</span></td></tr><tr><td><b>Vision</b> <span class="th" style="font-size:.8rem;color:var(--ink3)">(วิสัยทัศน์และความชัดเจน)</span></td><td><span class="sb w">2.87</span></td></tr></tbody></table></div>
+ <div class="sum-card wk"><div class="sum-title" style="color:var(--red)">🚨 จุดอ่อนที่ต้องเร่งพัฒนา</div>
+  <table class="dt" style="background:transparent"><tbody><tr><td><b>Change Agent</b> <span class="th" style="font-size:.8rem;color:var(--ink3)">(ตัวแทนการเปลี่ยนแปลง)</span><div style="font-size:.78rem;color:var(--ink3);font-weight:300;margin-top:.2rem">→ Change Agent Program (สร้างตัวแทนการเปลี่ยนแปลง), ADKAR Framework</div></td><td><span class="sb c">2.23</span></td></tr><tr><td><b>Change System</b> <span class="th" style="font-size:.8rem;color:var(--ink3)">(ระบบบริหารการเปลี่ยนแปลง)</span><div style="font-size:.78rem;color:var(--ink3);font-weight:300;margin-top:.2rem">→ ADKAR Framework (บริหารการเปลี่ยนแปลงระดับบุคคล), Change Governance Structure</div></td><td><span class="sb c">2.35</span></td></tr><tr><td><b>Communication</b> <span class="th" style="font-size:.8rem;color:var(--ink3)">(การสื่อสารการเปลี่ยนแปลง)</span><div style="font-size:.78rem;color:var(--ink3);font-weight:300;margin-top:.2rem">→ Communication Plan (แผนการสื่อสาร), ADKAR Framework</div></td><td><span class="sb c">2.43</span></td></tr><tr><td><b>Succession</b> <span class="th" style="font-size:.8rem;color:var(--ink3)">(Critical Role & แผนสืบทอด)</span><div style="font-size:.78rem;color:var(--ink3);font-weight:300;margin-top:.2rem">→ Critical Role Mapping, Succession Planning Framework</div></td><td><span class="sb c">2.51</span></td></tr></tbody></table></div>
+</div></div></section><section class="s-gray"><div class="container"><div class="sdivider"></div>
+<div class="stitle"><span class="snum">7</span> 🔍 เจาะลึกค่าเฉลี่ยตามกลุ่มองค์กร</div>
+<div class="ssub">เปรียบเทียบ TRI และ 4 มิติ จำแนกตามประเภทธุรกิจ รายละเอียดธุรกิจ และประเภทอุตสาหกรรม (เรียงจาก TRI สูงสุด) — กลุ่มที่มี N &lt; 5 (*) ใช้ตีความอย่างระมัดระวัง</div>
+<div class="dtabs"><button class="dtab active" data-t="biz" onclick="dpick(this)">ประเภทธุรกิจ</button><button class="dtab" data-t="detail" onclick="dpick(this)">รายละเอียดธุรกิจ</button><button class="dtab" data-t="ind" onclick="dpick(this)">ประเภทอุตสาหกรรม</button></div><div class="dpanel show" id="dp-biz"><div class="dt-scroll"><table class="dt"><thead><tr><th>กลุ่ม</th><th>N</th><th>TRI</th><th>Business</th><th>Technology</th><th>People</th><th>Culture</th></tr></thead><tbody><tr><td><b>บริษัทจำกัด</b></td><td>40</td>
+ <td><span class="sb w">2.79</span></td>
+ <td><span class="sb w">2.83</span></td><td><span class="sb w">2.81</span></td><td><span class="sb c">2.54</span></td><td><span class="sb w">2.97</span></td></tr><tr><td><b>องค์กรไม่แสวงหากำไร/อื่นๆ</b> *</td><td>1</td>
+ <td><span class="sb w">2.73</span></td>
+ <td><span class="sb g">3.13</span></td><td><span class="sb c">2.53</span></td><td><span class="sb c">2.59</span></td><td><span class="sb c">2.67</span></td></tr><tr><td><b>หน่วยงานภาครัฐ</b></td><td>16</td>
+ <td><span class="sb c">2.70</span></td>
+ <td><span class="sb w">2.80</span></td><td><span class="sb w">2.78</span></td><td><span class="sb c">2.53</span></td><td><span class="sb c">2.68</span></td></tr><tr><td><b>บริษัทมหาชน/จดทะเบียน</b></td><td>12</td>
+ <td><span class="sb c">2.69</span></td>
+ <td><span class="sb w">2.78</span></td><td><span class="sb w">2.85</span></td><td><span class="sb c">2.47</span></td><td><span class="sb c">2.65</span></td></tr><tr><td><b>ห้างหุ้นส่วนจำกัด</b> *</td><td>2</td>
+ <td><span class="sb c">2.12</span></td>
+ <td><span class="sb c">2.21</span></td><td><span class="sb c">1.62</span></td><td><span class="sb c">1.81</span></td><td><span class="sb w">2.86</span></td></tr></tbody></table></div></div><div class="dpanel" id="dp-detail"><div class="dt-scroll"><table class="dt"><thead><tr><th>กลุ่ม</th><th>N</th><th>TRI</th><th>Business</th><th>Technology</th><th>People</th><th>Culture</th></tr></thead><tbody><tr><td><b>ภาคการผลิต (Manufacturing)</b></td><td>19</td>
+ <td><span class="sb w">2.83</span></td>
+ <td><span class="sb w">2.91</span></td><td><span class="sb w">2.88</span></td><td><span class="sb c">2.53</span></td><td><span class="sb w">3.00</span></td></tr><tr><td><b>ภาคการบริการ (Service)</b></td><td>26</td>
+ <td><span class="sb w">2.77</span></td>
+ <td><span class="sb w">2.80</span></td><td><span class="sb w">2.81</span></td><td><span class="sb c">2.60</span></td><td><span class="sb w">2.88</span></td></tr><tr><td><b>หน่วยงานภาครัฐ</b></td><td>16</td>
+ <td><span class="sb w">2.72</span></td>
+ <td><span class="sb w">2.83</span></td><td><span class="sb w">2.80</span></td><td><span class="sb c">2.53</span></td><td><span class="sb w">2.72</span></td></tr><tr><td><b>ภาคการค้า (Trading)</b></td><td>10</td>
+ <td><span class="sb c">2.46</span></td>
+ <td><span class="sb c">2.56</span></td><td><span class="sb c">2.45</span></td><td><span class="sb c">2.19</span></td><td><span class="sb c">2.63</span></td></tr></tbody></table></div></div><div class="dpanel" id="dp-ind"><div class="dt-scroll"><table class="dt"><thead><tr><th>กลุ่ม</th><th>N</th><th>TRI</th><th>Business</th><th>Technology</th><th>People</th><th>Culture</th></tr></thead><tbody><tr><td><b>กลุ่มทรัพยากร</b> *</td><td>1</td>
+ <td><span class="sb g">3.07</span></td>
+ <td><span class="sb g">3.27</span></td><td><span class="sb g">3.17</span></td><td><span class="sb w">2.94</span></td><td><span class="sb w">2.89</span></td></tr><tr><td><b>เทคโนโลยี</b> *</td><td>3</td>
+ <td><span class="sb g">3.05</span></td>
+ <td><span class="sb w">2.96</span></td><td><span class="sb g">3.29</span></td><td><span class="sb w">2.81</span></td><td><span class="sb g">3.15</span></td></tr><tr><td><b>สินค้าอุตสาหกรรม</b></td><td>10</td>
+ <td><span class="sb w">2.95</span></td>
+ <td><span class="sb w">2.99</span></td><td><span class="sb w">2.87</span></td><td><span class="sb w">2.72</span></td><td><span class="sb g">3.21</span></td></tr><tr><td><b>เกษตร & อาหาร</b></td><td>11</td>
+ <td><span class="sb w">2.88</span></td>
+ <td><span class="sb g">3.02</span></td><td><span class="sb g">3.04</span></td><td><span class="sb c">2.46</span></td><td><span class="sb w">3.00</span></td></tr><tr><td><b>ธุรกิจการเงิน</b></td><td>9</td>
+ <td><span class="sb w">2.78</span></td>
+ <td><span class="sb w">2.91</span></td><td><span class="sb w">2.96</span></td><td><span class="sb c">2.52</span></td><td><span class="sb w">2.73</span></td></tr><tr><td><b>บริการ</b></td><td>12</td>
+ <td><span class="sb c">2.68</span></td>
+ <td><span class="sb w">2.80</span></td><td><span class="sb c">2.64</span></td><td><span class="sb c">2.47</span></td><td><span class="sb w">2.81</span></td></tr><tr><td><b>หน่วยงานภาครัฐ</b></td><td>10</td>
+ <td><span class="sb c">2.67</span></td>
+ <td><span class="sb w">2.78</span></td><td><span class="sb w">2.73</span></td><td><span class="sb c">2.58</span></td><td><span class="sb c">2.61</span></td></tr><tr><td><b>อสังหาริมทรัพย์และก่อสร้าง</b></td><td>12</td>
+ <td><span class="sb c">2.54</span></td>
+ <td><span class="sb c">2.51</span></td><td><span class="sb c">2.53</span></td><td><span class="sb c">2.43</span></td><td><span class="sb c">2.69</span></td></tr><tr><td><b>สินค้าอุปโภคบริโภค</b> *</td><td>3</td>
+ <td><span class="sb c">2.04</span></td>
+ <td><span class="sb c">1.98</span></td><td><span class="sb c">1.96</span></td><td><span class="sb c">1.71</span></td><td><span class="sb c">2.51</span></td></tr></tbody></table></div></div>
+</div></section></main><footer class="footer"><strong>DeOne Academy</strong> · Transformation Readiness Index (TRI) · TEN X รุ่น 5 · Confidential Report · 2026</footer>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+function dpick(btn){document.querySelectorAll('.dtab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+document.querySelectorAll('.dpanel').forEach(p=>p.classList.remove('show'));
+document.getElementById('dp-'+btn.dataset.t).classList.add('show');}
+const dataLabelPlugin={id:'dl',afterDatasetsDraw(ch){const{ctx}=ch;const meta=ch.getDatasetMeta(0);
+ctx.save();ctx.font='600 12px "IBM Plex Sans Thai",sans-serif';ctx.textBaseline='middle';
+meta.data.forEach((bar,i)=>{const v=ch.data.datasets[0].data[i];const col=v<2.70?'#ef4444':v<2.85?'#f59e0b':v<3.00?'#d97706':'#10b981';
+ctx.fillStyle=col;ctx.textAlign='left';ctx.fillText(v.toFixed(2),bar.x+8,bar.y);});ctx.restore();}};
+document.addEventListener('DOMContentLoaded',function(){
+ if(typeof Chart==='undefined'){var w=document.querySelector('.chart-wrap');
+  if(w) w.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--ink4);font-weight:300;text-align:center;padding:1rem">กราฟต้องการการเชื่อมต่ออินเทอร์เน็ตเพื่อโหลด Chart.js<br>(ข้อมูลทั้งหมดแสดงอยู่ในตารางหมวดย่อยด้านบนแล้ว)</div>';return;}
+ Chart.defaults.color='#656B88';Chart.defaults.font.family="'IBM Plex Sans Thai',sans-serif";
+ const labels=["Change Agent", "Change System", "Communication", "Succession", "Skills", "Change Plan", "Change Ready", "Employee Own.", "IT Infra", "Tech Align", "Leadership", "Engagement", "Strategic Agil", "Market", "Tech Integ", "Innovation", "Learning", "Process Auto", "Vision", "Trust & Collab", "Data Mgmt", "Mgmt Support"];
+ const scores=[2.23, 2.35, 2.43, 2.51, 2.52, 2.54, 2.56, 2.58, 2.61, 2.69, 2.7, 2.7, 2.72, 2.76, 2.8, 2.81, 2.82, 2.85, 2.87, 2.89, 2.92, 3.12];
+ const colors=scores.map(s=>s<2.70?'rgba(239,68,68,.85)':s<2.85?'rgba(245,158,11,.85)':s<3.00?'rgba(251,191,36,.85)':'rgba(16,185,129,.85)');
+ new Chart(document.getElementById('subdimChart'),{type:'bar',
+  data:{labels,datasets:[{label:'คะแนนเฉลี่ย รุ่น 5 (71 องค์กร)',data:scores,backgroundColor:colors,borderRadius:5,barThickness:17}]},
+  options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',layout:{padding:{right:34}},
+   plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ct){var s=ct.raw;var l=s<2.70?'🚨 วิกฤต':s<2.85?'⚠️ สูง':s<3.00?'📌 ปานกลาง':'✅ ดี';return s.toFixed(2)+'  '+l;}}}},
+   scales:{x:{min:2.0,max:3.5,grid:{color:'rgba(11,20,55,.06)'},ticks:{stepSize:0.25}},y:{grid:{display:false},ticks:{font:{size:11.5}}}}},
+  plugins:[dataLabelPlugin]});
+});
+</script>
+</body></html>
